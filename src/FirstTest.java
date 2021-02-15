@@ -4,14 +4,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.xml.ws.WebEndpoint;
 import java.net.URL;
 
 public class FirstTest {
@@ -43,8 +40,8 @@ public class FirstTest {
 
 
     @Test
-    public void testAssertElementHasText(){
-        assertElementHasText(By.xpath("//*[contains(@text, 'Search Wikipedia')]"),"Search Wikipedia",
+    public void testAssertElementHasText() throws Exception {
+        assertElementHasText(By.xpath("//*[contains(@text, 'Search Wikipedia')]"), "Search Wikipedia",
                 "Cannot find element with text 'Search Wikipedia'");
     }
 
@@ -55,11 +52,12 @@ public class FirstTest {
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
-    private String assertElementHasText(By by, String expectedText, String errorTextMessage) {
+    private String assertElementHasText(By by, String expectedText, String errorTextMessage) throws Exception {
         WebElement element = waitForElementPresent(by, errorTextMessage, 5);
         String actualText = element.getAttribute("text");
-        if (actualText == expectedText) {
+        if (actualText.equals(expectedText)) {
             return actualText;
-        } else return errorTextMessage;
+        } else
+            throw new Exception(errorTextMessage);
     }
 }
