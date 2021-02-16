@@ -33,11 +33,6 @@ public class FirstTest {
         driver.quit();
     }
 
-    @Test
-    public void firstTest() {
-        System.out.println("First test run");
-    }
-
 
     @Test
     public void testAssertElementHasText() throws Exception {
@@ -45,11 +40,39 @@ public class FirstTest {
                 "Cannot find element with text 'Search Wikipedia'");
     }
 
+    @Test
+    public void testCancelSearch() {
+        waitForElementAndClick(By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "Cannot find element with text 'Search Wikipedia'", 5);
+
+        waitForElementAndSendKeys(By.xpath("//*[contains(@text, 'Search…')]"),
+                "Cannot find search input", 5, "Led Zeppelin");
+
+        waitForElementPresent(By.xpath("//*[@resource-id ='org.wikipedia:id/page_list_item_container']//*[@text ='Led Zeppelin']"),
+                "Cannot find search 'Led Zeppelin' in the search results", 15);
+
+        waitForElementAndClear(By.xpath("//*[@resource-id ='org.wikipedia:id/search_src_text']"),
+                "Cannot find search field", 5);
+
+        waitForElementAndClick(By.xpath("//*[@resource-id ='org.wikipedia:id/search_close_btn']"),
+                "Cannot find X button", 10);
+
+
+        waitForElementNotPresent(By.xpath("//*[@resource-id ='org.wikipedia:id/page_list_item_container']//*[@text ='Led Zeppelin']"),
+                "Cannot find search 'Led Zeppelin' in the search results", 15);
+    }
+
 
     private WebElement waitForElementPresent(By by, String errorTextMessage, long timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
-        wait.withMessage(errorTextMessage + "/n");
+        wait.withMessage(errorTextMessage + "\n");
         return wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+
+    private Boolean waitForElementNotPresent(By by, String errorTextMessage, long timeoutInSeconds) {
+        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
+        wait.withMessage(errorTextMessage + "\n");
+        return wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
     }
 
     private String assertElementHasText(By by, String expectedText, String errorTextMessage) throws Exception {
@@ -59,5 +82,23 @@ public class FirstTest {
             return actualText;
         } else
             throw new Exception(errorTextMessage);
+    }
+
+    private WebElement waitForElementAndClick(By by, String errorTextMessage, long timeoutInSeconds) {
+        WebElement element = waitForElementPresent(by, errorTextMessage, timeoutInSeconds);
+        element.click();
+        return element;
+    }
+
+    private WebElement waitForElementAndSendKeys(By by, String errorTextMessage, long timeoutInSeconds, String value) {
+        WebElement element = waitForElementPresent(by, errorTextMessage, timeoutInSeconds);
+        element.sendKeys(value);
+        return element;
+    }
+
+    private WebElement waitForElementAndClear(By by, String errorTextMessage, long timeoutInSeconds) {
+        WebElement element = waitForElementPresent(by, errorTextMessage, timeoutInSeconds);
+        element.clear();
+        return element;
     }
 }
