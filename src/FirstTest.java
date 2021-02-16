@@ -1,6 +1,7 @@
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -62,6 +63,21 @@ public class FirstTest {
                 "Cannot find search 'Led Zeppelin' in the search results", 15);
     }
 
+    @Test
+    public void testEveryResultHasSearchingWord() throws Exception {
+        waitForElementAndClick(By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "Cannot find element with text 'Search Wikipedia'", 5);
+
+        waitForElementAndSendKeys(By.xpath("//*[contains(@text, 'Search…')]"),
+                "Cannot find search input", 5, "Java");
+
+        Assert.assertTrue(assertElementContainsText(By.xpath("//*[contains(@text, 'Java')]"),
+                "Java", "The first search result does not contains 'Java' word") &&
+                assertElementContainsText(By.xpath("//*[contains(@text, 'Java (programming language)')]"),
+                        "Java", "The third search result does not contains 'Java' word") &&
+                assertElementContainsText(By.xpath("//*[contains(@text, 'JavaScript')]"),
+                        "Java", "The third search result does not contains 'Java' word"));
+    }
 
     private WebElement waitForElementPresent(By by, String errorTextMessage, long timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
@@ -80,6 +96,15 @@ public class FirstTest {
         String actualText = element.getAttribute("text");
         if (actualText.equals(expectedText)) {
             return actualText;
+        } else
+            throw new Exception(errorTextMessage);
+    }
+
+    private boolean assertElementContainsText(By by, String expectedText, String errorTextMessage) throws Exception {
+        WebElement element = waitForElementPresent(by, errorTextMessage, 5);
+        String actualText = element.getAttribute("text");
+        if (actualText.contains(expectedText)) {
+            return true;
         } else
             throw new Exception(errorTextMessage);
     }
