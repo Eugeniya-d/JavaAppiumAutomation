@@ -1,4 +1,5 @@
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import org.junit.After;
 import org.junit.Assert;
@@ -79,6 +80,97 @@ public class FirstTest {
                         "Java", "The third search result does not contains 'Java' word"));
     }
 
+
+    @Test
+    public void testSaveAndDeleteArticleToReadindList(){
+        waitForElementAndClick(By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "Cannot find element with text 'Search Wikipedia'",
+                5);
+
+        waitForElementAndSendKeys(By.xpath("//*[contains(@text, 'Search…')]"),
+                "Cannot find search input",
+                5, "Java");
+
+        waitForElementAndClick(By.xpath("//*[contains(@text, 'Island of Indonesia')]"),
+                "Cannot find Java- island article",
+                5);
+
+        waitForElementAndClick(By.xpath("//android.widget.LinearLayout/android.support.v7.app.ActionBar.Tab/android.widget.ImageView[@content-desc='Add this article to a reading list']"),
+              "Cannot find 'Add this article to favorites' button",
+                15);
+
+        waitForElementAndClick(By.xpath("//*[contains(@text, 'GOT IT')]"),
+                "Cannot find button with text 'GOT IT'",
+                5);
+
+        waitForElementAndClear(By.id("org.wikipedia:id/text_input"),
+                "Cannot find 'Add this article to favorites' button",
+                15);
+
+        String folderName = "My folder";
+
+        waitForElementAndSendKeys(By.id("org.wikipedia:id/text_input"),
+                "Cannot find 'Add this article to favorites' button",
+                15,
+                folderName);
+
+        waitForElementAndClick(By.xpath("//*[contains(@text, 'OK')]"),
+                "Cannot find button with text 'OK'",
+                5);
+
+        waitForElementAndClick(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
+                "Cannot find 'Close article' button",
+                15);
+
+        waitForElementAndClick(By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "Cannot find element with text 'Search Wikipedia'",
+                5);
+
+        waitForElementAndSendKeys(By.xpath("//*[contains(@text, 'Search…')]"),
+                "Cannot find search input",
+                5, "Java");
+
+        waitForElementAndClick(By.xpath("//*[contains(@text, 'Object-oriented programming language')]"),
+                "Cannot find Java- Object-oriented programming language",
+                15);
+
+        waitForElementAndClick(By.xpath("//android.widget.LinearLayout/android.support.v7.app.ActionBar.Tab/android.widget.ImageView[@content-desc='Add this article to a reading list']"),
+                "Cannot find 'Add this article to favorites' button",
+                15);
+
+        waitForElementAndClick(By.xpath("//*[contains(@text, 'My folder')]"),
+                "Cannot find 'My folder'",
+                15);
+
+        waitForElementAndClick(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
+                "Cannot find 'Close article' button",
+                15);
+
+        waitForElementAndClick(By.xpath("//android.widget.FrameLayout[@content-desc='My lists']"),
+                "Cannot find 'Close article' button",
+                15);
+
+        waitForElementAndClick(By.id("org.wikipedia:id/item_title"),
+                "Cannot find folder 'My folder'",
+                15);
+
+        waitForElementPresent(By.xpath("//*[contains(@text, 'object-oriented programming language')]"),
+                "Cannot find article 'object-oriented programming language'",
+                15);
+
+        swipeElementToLeft(By.xpath("//*[contains(@text, 'object-oriented programming language')]"),
+                "Cannot find the saved article");
+
+        waitForElementPresent(By.xpath("//*[contains(@text, 'island of Indonesia')]"),
+                "Cannot find the saved article",
+                10);
+
+        waitForElementNotPresent(By.xpath("//*[contains(@text, 'object-oriented programming language')]"),
+                "Cannot delete the saved article",
+                10);
+
+    }
+
     private WebElement waitForElementPresent(By by, String errorTextMessage, long timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
         wait.withMessage(errorTextMessage + "\n");
@@ -125,5 +217,27 @@ public class FirstTest {
         WebElement element = waitForElementPresent(by, errorTextMessage, timeoutInSeconds);
         element.clear();
         return element;
+    }
+
+    protected void swipeElementToLeft(By by,String errorTextMessage){
+       WebElement element =  waitForElementPresent(
+               by,
+               errorTextMessage,
+               10);
+       int leftX = element.getLocation().getX();
+       int rightX = leftX + element.getSize().getWidth();
+       int upperY = element.getLocation().getY();
+       int lowerY = upperY + element.getSize().getHeight();
+       int middleY = (upperY + lowerY)/ 2;
+
+       TouchAction action = new TouchAction(driver);
+       action
+               .press(rightX,middleY)
+               .waitAction(300)
+               .moveTo(leftX,middleY)
+               .release().perform();
+
+
+
     }
 }
