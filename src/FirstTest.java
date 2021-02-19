@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -33,6 +34,7 @@ public class FirstTest {
 
     @After
     public void tearDown() {
+        driver.rotate(ScreenOrientation.PORTRAIT);
         driver.quit();
     }
 
@@ -60,9 +62,10 @@ public class FirstTest {
         waitForElementAndClick(By.xpath("//*[@resource-id ='org.wikipedia:id/search_close_btn']"),
                 "Cannot find X button", 10);
 
-
+        driver.rotate(ScreenOrientation.LANDSCAPE);
         waitForElementNotPresent(By.xpath("//*[@resource-id ='org.wikipedia:id/page_list_item_container']//*[@text ='Led Zeppelin']"),
                 "Cannot find search 'Led Zeppelin' in the search results", 15);
+
     }
 
     @Test
