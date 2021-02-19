@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
+import java.util.List;
 
 public class FirstTest {
     private AppiumDriver driver;
@@ -89,7 +90,8 @@ public class FirstTest {
 
         waitForElementAndSendKeys(By.xpath("//*[contains(@text, 'Search…')]"),
                 "Cannot find search input",
-                5, "Java");
+                5,
+                "Java");
 
         waitForElementAndClick(By.xpath("//*[contains(@text, 'Island of Indonesia')]"),
                 "Cannot find Java- island article",
@@ -171,6 +173,31 @@ public class FirstTest {
 
     }
 
+    @Test
+    public void testTitleUsersSearch() throws Exception {
+        waitForElementAndClick(By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+                "Cannot find element with text 'Search Wikipedia'",
+                5);
+
+
+        waitForElementAndSendKeys(By.xpath("//*[contains(@text, 'Search…')]"),
+                "Cannot find search input",
+                5,
+                "Java");
+
+        String searchTitle = "//*[contains(@text, 'Island of Indonesia')]";
+        waitForElementPresent(By.xpath(searchTitle),
+                "Cannot find Java- island article",
+                5);
+
+        assertElementPresent(By.xpath(searchTitle),
+                "Element with title 'Island of Indonesia'  not presented");
+
+        waitForElementAndClick(By.xpath(searchTitle),
+                "Cannot click Java- island article",
+                3);
+    }
+
     private WebElement waitForElementPresent(By by, String errorTextMessage, long timeoutInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
         wait.withMessage(errorTextMessage + "\n");
@@ -200,6 +227,20 @@ public class FirstTest {
         } else
             throw new Exception(errorTextMessage);
     }
+
+    private void assertElementPresent(By by, String errorTextMessage) throws Exception {
+        int amountOfElements = getAmountOfElements(by);
+        if (amountOfElements <= 0) {
+            String defaultMessage = "'An element'" + by.toString() + "'supposed to be present";
+            throw new AssertionError(defaultMessage + " " + errorTextMessage);
+        }
+    }
+
+    private int getAmountOfElements(By by) {
+        List elements = driver.findElements(by);
+        return elements.size();
+    }
+
 
     private WebElement waitForElementAndClick(By by, String errorTextMessage, long timeoutInSeconds) {
         WebElement element = waitForElementPresent(by, errorTextMessage, timeoutInSeconds);
@@ -236,8 +277,5 @@ public class FirstTest {
                .waitAction(300)
                .moveTo(leftX,middleY)
                .release().perform();
-
-
-
     }
 }
