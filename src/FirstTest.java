@@ -30,11 +30,11 @@ public class FirstTest {
         capabilities.setCapability("app", "/Users/a18275751/Desktop/JavaAppiumAutomation/apks/org.wikipedia.apk");
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver.rotate(ScreenOrientation.PORTRAIT);
     }
 
     @After
     public void tearDown() {
-        driver.rotate(ScreenOrientation.PORTRAIT);
         driver.quit();
     }
 
@@ -170,7 +170,9 @@ public class FirstTest {
                 "Cannot find the saved article",
                 10);
 
-        waitForElementNotPresent(By.xpath("//*[contains(@text, 'object-oriented programming language')]"),
+        waitForElementNotPresent(By.xpath("//*[contains(@text, 'object-oriented programming language" +
+                        "" +
+                        "')]"),
                 "Cannot delete the saved article",
                 10);
 
