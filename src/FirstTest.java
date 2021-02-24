@@ -38,7 +38,6 @@ public class FirstTest extends CoreTestCase {
         MainPageObject.waitForElementAndClick(By.xpath("//*[@resource-id ='org.wikipedia:id/search_close_btn']"),
                 "Cannot find X button", 10);
 
-        driver.rotate(ScreenOrientation.LANDSCAPE);
         MainPageObject.waitForElementNotPresent(By.xpath("//*[@resource-id ='org.wikipedia:id/page_list_item_container']//*[@text ='Led Zeppelin']"),
                 "Cannot find search 'Led Zeppelin' in the search results", 15);
 
