@@ -5,12 +5,9 @@ import org.openqa.selenium.By;
 
 public class SearchPageObject extends MainPageObject {
 
-    private static final String
-            SEARCH_INIT_ELEMENT = "//*[contains(@text, 'Search Wikipedia')]";
-    private static final String
-            SEARCH_INPUT = "//*[contains(@text, 'Search…')]";
-    private static final String
-            SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id ='org.wikipedia:id/page_list_item_container']//*[@text ='{SUBSTRING}']";
+    private static final String SEARCH_INIT_ELEMENT = "//*[contains(@text, 'Search Wikipedia')]";
+    private static final String SEARCH_INPUT = "//*[contains(@text, 'Search…')]";
+    private static final String SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id ='org.wikipedia:id/page_list_item_container']//*[@text ='{SUBSTRING}']";
 
     public SearchPageObject(AppiumDriver driver) {
         super(driver);
