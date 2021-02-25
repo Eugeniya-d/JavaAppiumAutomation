@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ScreenOrientation;
 import ui.MainPageObject;
+import ui.SearchPageObject;
 
 
 public class FirstTest extends CoreTestCase {
@@ -17,29 +18,33 @@ public class FirstTest extends CoreTestCase {
 
     @Test
     public void testAssertElementHasText() throws Exception {
-        MainPageObject.assertElementHasText(By.xpath("//*[contains(@text, 'Search Wikipedia')]"), "Search Wikipedia",
-                "Cannot find element with text 'Search Wikipedia'");
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject.initSearchInput();
     }
 
     @Test
     public void testCancelSearch() {
-        MainPageObject.waitForElementAndClick(By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
-                "Cannot find element with text 'Search Wikipedia'", 5);
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject.initSearchInput();
+        SearchPageObject.typeSearchLine("Led Zeppelin");
+        SearchPageObject.clearStringSearch();
+        SearchPageObject.waitForCancelButtonToAppear();
+        SearchPageObject.clickCancelSearch();
+        SearchPageObject.waitForCancelButtonToDisappear();
+      //  MainPageObject.waitForElementAndSendKeys(By.xpath("//*[contains(@text, 'Search…')]"),
+        //        "Cannot find search input", 5, "Led Zeppelin");
 
-        MainPageObject.waitForElementAndSendKeys(By.xpath("//*[contains(@text, 'Search…')]"),
-                "Cannot find search input", 5, "Led Zeppelin");
+       // MainPageObject.waitForElementPresent(By.xpath("//*[@resource-id ='org.wikipedia:id/page_list_item_container']//*[@text ='Led Zeppelin']"),
+       //         "Cannot find search 'Led Zeppelin' in the search results", 15);
 
-        MainPageObject.waitForElementPresent(By.xpath("//*[@resource-id ='org.wikipedia:id/page_list_item_container']//*[@text ='Led Zeppelin']"),
-                "Cannot find search 'Led Zeppelin' in the search results", 15);
+        //MainPageObject.waitForElementAndClear(By.xpath("//*[@resource-id ='org.wikipedia:id/search_src_text']"),
+       //         "Cannot find search field", 5);
 
-        MainPageObject.waitForElementAndClear(By.xpath("//*[@resource-id ='org.wikipedia:id/search_src_text']"),
-                "Cannot find search field", 5);
+       // MainPageObject.waitForElementAndClick(By.xpath("//*[@resource-id ='org.wikipedia:id/search_close_btn']"),
+        //        "Cannot find X button", 10);
 
-        MainPageObject.waitForElementAndClick(By.xpath("//*[@resource-id ='org.wikipedia:id/search_close_btn']"),
-                "Cannot find X button", 10);
-
-        MainPageObject.waitForElementNotPresent(By.xpath("//*[@resource-id ='org.wikipedia:id/page_list_item_container']//*[@text ='Led Zeppelin']"),
-                "Cannot find search 'Led Zeppelin' in the search results", 15);
+       // MainPageObject.waitForElementNotPresent(By.xpath("//*[@resource-id ='org.wikipedia:id/page_list_item_container']//*[@text ='Led Zeppelin']"),
+       //         "Cannot find search 'Led Zeppelin' in the search results", 15);
 
     }
 
