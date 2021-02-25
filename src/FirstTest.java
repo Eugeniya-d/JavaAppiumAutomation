@@ -31,21 +31,6 @@ public class FirstTest extends CoreTestCase {
         SearchPageObject.waitForCancelButtonToAppear();
         SearchPageObject.clickCancelSearch();
         SearchPageObject.waitForCancelButtonToDisappear();
-      //  MainPageObject.waitForElementAndSendKeys(By.xpath("//*[contains(@text, 'Search…')]"),
-        //        "Cannot find search input", 5, "Led Zeppelin");
-
-       // MainPageObject.waitForElementPresent(By.xpath("//*[@resource-id ='org.wikipedia:id/page_list_item_container']//*[@text ='Led Zeppelin']"),
-       //         "Cannot find search 'Led Zeppelin' in the search results", 15);
-
-        //MainPageObject.waitForElementAndClear(By.xpath("//*[@resource-id ='org.wikipedia:id/search_src_text']"),
-       //         "Cannot find search field", 5);
-
-       // MainPageObject.waitForElementAndClick(By.xpath("//*[@resource-id ='org.wikipedia:id/search_close_btn']"),
-        //        "Cannot find X button", 10);
-
-       // MainPageObject.waitForElementNotPresent(By.xpath("//*[@resource-id ='org.wikipedia:id/page_list_item_container']//*[@text ='Led Zeppelin']"),
-       //         "Cannot find search 'Led Zeppelin' in the search results", 15);
-
     }
 
     @Test
@@ -67,7 +52,10 @@ public class FirstTest extends CoreTestCase {
 
     @Test
     public void testSaveAndDeleteArticleToReadindList(){
-        MainPageObject.waitForElementAndClick(By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject.initSearchInput();
+        SearchPageObject.typeSearchLine("Island of Indonesia");
+       /* MainPageObject.waitForElementAndClick(By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
                 "Cannot find element with text 'Search Wikipedia'",
                 5);
 
@@ -79,7 +67,7 @@ public class FirstTest extends CoreTestCase {
         MainPageObject.waitForElementAndClick(By.xpath("//*[contains(@text, 'Island of Indonesia')]"),
                 "Cannot find Java- island article",
                 5);
-
+*/
         MainPageObject.waitForElementAndClick(By.xpath("//android.widget.LinearLayout/android.support.v7.app.ActionBar.Tab/android.widget.ImageView[@content-desc='Add this article to a reading list']"),
               "Cannot find 'Add this article to favorites' button",
                 15);
@@ -107,18 +95,21 @@ public class FirstTest extends CoreTestCase {
                 "Cannot find 'Close article' button",
                 15);
 
-        MainPageObject.waitForElementAndClick(By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
-                "Cannot find element with text 'Search Wikipedia'",
-                5);
+       // MainPageObject.waitForElementAndClick(By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
+         //       "Cannot find element with text 'Search Wikipedia'",
+           //     5);
 
-        MainPageObject.waitForElementAndSendKeys(By.xpath("//*[contains(@text, 'Search…')]"),
+        SearchPageObject.initSearchInput();
+        SearchPageObject.typeSearchLine("Object-oriented programming language");
+
+        /*MainPageObject.waitForElementAndSendKeys(By.xpath("//*[contains(@text, 'Search…')]"),
                 "Cannot find search input",
                 5, "Java");
 
         MainPageObject. waitForElementAndClick(By.xpath("//*[contains(@text, 'Object-oriented programming language')]"),
                 "Cannot find Java- Object-oriented programming language",
                 15);
-
+*/
         MainPageObject.waitForElementAndClick(By.xpath("//android.widget.LinearLayout/android.support.v7.app.ActionBar.Tab/android.widget.ImageView[@content-desc='Add this article to a reading list']"),
                 "Cannot find 'Add this article to favorites' button",
                 15);
@@ -150,9 +141,7 @@ public class FirstTest extends CoreTestCase {
                 "Cannot find the saved article",
                 10);
 
-        MainPageObject.waitForElementNotPresent(By.xpath("//*[contains(@text, 'object-oriented programming language" +
-                        "" +
-                        "')]"),
+        MainPageObject.waitForElementNotPresent(By.xpath("//*[contains(@text, 'object-oriented programming language')]"),
                 "Cannot delete the saved article",
                 10);
 
