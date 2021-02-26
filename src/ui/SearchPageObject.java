@@ -48,33 +48,42 @@ public class SearchPageObject extends MainPageObject {
                 5);
     }
 
-    public void waitForCancelButtonToAppear(){
-        this.waitForElementPresent(By.xpath(SEARCH_CANCEL_BUTTON ),
+    public void waitForCancelButtonToAppear() {
+        this.waitForElementPresent(By.xpath(SEARCH_CANCEL_BUTTON),
                 "Cannot find search field",
                 5);
     }
 
-    public void clearStringSearch(){
+    public void clearStringSearch() {
         this.waitForElementAndClear(By.xpath(SEARCH_CLEAR_STRING_BUTTON),
                 "Cannot find search field",
                 5);
     }
 
-    public void waitForCancelButtonToDisappear(){
+    public void waitForCancelButtonToDisappear() {
         this.waitForElementNotPresent(By.xpath(SEARCH_CANCEL_BUTTON),
                 "Search cancel button is stiil present",
                 5);
     }
 
-    public void clickCancelSearch(){
+    public void clickCancelSearch() {
         this.waitForElementAndClear(By.xpath(SEARCH_CANCEL_BUTTON),
                 "Cannot find search and click cancel button",
                 5);
     }
+
     public void goToTitle(String articleTitle) {
         String getArticleTitle = getArticleTitle(articleTitle);
         this.waitForElementAndClick(By.xpath(getArticleTitle),
                 "Cannot find title with name " + articleTitle,
                 10);
     }
+
+    public void waitForTitlePresent(String articleTitle) {
+        String getArticleTitle = getArticleTitle(articleTitle);
+        this.waitForElementPresent(By.xpath(getArticleTitle),
+                "Article " + articleTitle + " not presented",
+                0);
+    }
 }
+

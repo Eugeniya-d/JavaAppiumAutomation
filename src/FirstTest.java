@@ -86,27 +86,12 @@ public class FirstTest extends CoreTestCase {
 
     @Test
     public void testTitleUsersSearch() throws Exception {
-        MainPageObject.waitForElementAndClick(By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
-                "Cannot find element with text 'Search Wikipedia'",
-                5);
+        SearchPageObject SearchPageObject = new SearchPageObject(driver);
 
-
-        MainPageObject.waitForElementAndSendKeys(By.xpath("//*[contains(@text, 'Search…')]"),
-                "Cannot find search input",
-                5,
-                "Java");
-
-        String searchTitle = "//*[contains(@text, 'Island of Indonesia')]";
-        MainPageObject.waitForElementPresent(By.xpath(searchTitle),
-                "Cannot find Java- island article",
-                5);
-
-        MainPageObject.assertElementPresent(By.xpath(searchTitle),
-                "Element with title 'Island of Indonesia'  not presented");
-
-        MainPageObject.waitForElementAndClick(By.xpath(searchTitle),
-                "Cannot click Java- island article",
-                3);
+        SearchPageObject.initSearchInput();
+        SearchPageObject.typeSearchLine("Java");
+        String articleTitleOnSearch = "Island of Indonesia";
+        SearchPageObject.waitForTitlePresent(articleTitleOnSearch);
+        SearchPageObject.goToTitle(articleTitleOnSearch);
     }
-
 }
