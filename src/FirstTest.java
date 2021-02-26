@@ -3,8 +3,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ScreenOrientation;
-import ui.MainPageObject;
-import ui.SearchPageObject;
+import ui.*;
 
 
 public class FirstTest extends CoreTestCase {
@@ -53,98 +52,36 @@ public class FirstTest extends CoreTestCase {
     @Test
     public void testSaveAndDeleteArticleToReadindList(){
         SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
+        NavigationUi NavigationUi = new NavigationUi(driver);
+        MyListsPageObject MyListsPageObject = new MyListsPageObject(driver);
+
         SearchPageObject.initSearchInput();
-        SearchPageObject.typeSearchLine("Island of Indonesia");
-       /* MainPageObject.waitForElementAndClick(By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
-                "Cannot find element with text 'Search Wikipedia'",
-                5);
-
-        MainPageObject.waitForElementAndSendKeys(By.xpath("//*[contains(@text, 'Search…')]"),
-                "Cannot find search input",
-                5,
-                "Java");
-
-        MainPageObject.waitForElementAndClick(By.xpath("//*[contains(@text, 'Island of Indonesia')]"),
-                "Cannot find Java- island article",
-                5);
-*/
-        MainPageObject.waitForElementAndClick(By.xpath("//android.widget.LinearLayout/android.support.v7.app.ActionBar.Tab/android.widget.ImageView[@content-desc='Add this article to a reading list']"),
-              "Cannot find 'Add this article to favorites' button",
-                15);
-
-        MainPageObject.waitForElementAndClick(By.xpath("//*[contains(@text, 'GOT IT')]"),
-                "Cannot find button with text 'GOT IT'",
-                5);
-
-        MainPageObject.waitForElementAndClear(By.id("org.wikipedia:id/text_input"),
-                "Cannot find 'Add this article to favorites' button",
-                15);
-
+        SearchPageObject.typeSearchLine("Java");
+        String firstArticleTitleOnSearch = "Island of Indonesia";
+        SearchPageObject.goToTitle(firstArticleTitleOnSearch);
+        ArticlePageObject.addArticleToFavoriteList();
+        ArticlePageObject.confirmArticleSelection();
+        ArticlePageObject.clearDefaultNameOfFolder();
         String folderName = "My folder";
-
-        MainPageObject.waitForElementAndSendKeys(By.id("org.wikipedia:id/text_input"),
-                "Cannot find 'Add this article to favorites' button",
-                15,
-                folderName);
-
-        MainPageObject.waitForElementAndClick(By.xpath("//*[contains(@text, 'OK')]"),
-                "Cannot find button with text 'OK'",
-                5);
-
-        MainPageObject.waitForElementAndClick(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
-                "Cannot find 'Close article' button",
-                15);
-
-       // MainPageObject.waitForElementAndClick(By.xpath("//*[contains(@text, 'Search Wikipedia')]"),
-         //       "Cannot find element with text 'Search Wikipedia'",
-           //     5);
-
+        ArticlePageObject.giveArticleNewName(folderName);
+        ArticlePageObject.confirmArticleAddiction();
+        NavigationUi.exitFromArticlePage();
         SearchPageObject.initSearchInput();
-        SearchPageObject.typeSearchLine("Object-oriented programming language");
-
-        /*MainPageObject.waitForElementAndSendKeys(By.xpath("//*[contains(@text, 'Search…')]"),
-                "Cannot find search input",
-                5, "Java");
-
-        MainPageObject. waitForElementAndClick(By.xpath("//*[contains(@text, 'Object-oriented programming language')]"),
-                "Cannot find Java- Object-oriented programming language",
-                15);
-*/
-        MainPageObject.waitForElementAndClick(By.xpath("//android.widget.LinearLayout/android.support.v7.app.ActionBar.Tab/android.widget.ImageView[@content-desc='Add this article to a reading list']"),
-                "Cannot find 'Add this article to favorites' button",
-                15);
-
-        MainPageObject.waitForElementAndClick(By.xpath("//*[contains(@text, 'My folder')]"),
-                "Cannot find 'My folder'",
-                15);
-
-        MainPageObject.waitForElementAndClick(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"),
-                "Cannot find 'Close article' button",
-                15);
-
-        MainPageObject.waitForElementAndClick(By.xpath("//android.widget.FrameLayout[@content-desc='My lists']"),
-                "Cannot find 'Close article' button",
-                15);
-
-        MainPageObject.waitForElementAndClick(By.id("org.wikipedia:id/item_title"),
-                "Cannot find folder 'My folder'",
-                15);
-
-        MainPageObject.waitForElementPresent(By.xpath("//*[contains(@text, 'object-oriented programming language')]"),
-                "Cannot find article 'object-oriented programming language'",
-                15);
-
-        MainPageObject.swipeElementToLeft(By.xpath("//*[contains(@text, 'object-oriented programming language')]"),
-                "Cannot find the saved article");
-
-        MainPageObject.waitForElementPresent(By.xpath("//*[contains(@text, 'island of Indonesia')]"),
-                "Cannot find the saved article",
-                10);
-
-        MainPageObject.waitForElementNotPresent(By.xpath("//*[contains(@text, 'object-oriented programming language')]"),
-                "Cannot delete the saved article",
-                10);
-
+        SearchPageObject.typeSearchLine("Java");
+        String secondArticleTitleOnSearch = "Object-oriented programming language";
+        SearchPageObject.goToTitle(secondArticleTitleOnSearch);
+        ArticlePageObject.addArticleToFavoriteList();
+        ArticlePageObject.addArticleToExistingFolder(folderName);
+        NavigationUi.exitFromArticlePage();
+        NavigationUi.goToSavedFolders();
+        MyListsPageObject.goToSelectedFolder();
+        String firstArticleTitle = "object-oriented programming language";
+        String secondArticleTitle = "island of Indonesia";
+        MyListsPageObject.waitForTitle(firstArticleTitle);
+        MyListsPageObject.deleteArticle(firstArticleTitle);
+        MyListsPageObject.waitForTitle(secondArticleTitle);
+        MyListsPageObject.waitNotForTitle(firstArticleTitle);
     }
 
     @Test
