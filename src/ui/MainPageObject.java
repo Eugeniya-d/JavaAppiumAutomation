@@ -37,7 +37,7 @@ public class MainPageObject {
             throw new Exception(errorTextMessage);
     }
 
-    public boolean assertElementContainsText(By by, String expectedText, String errorTextMessage) throws Exception {
+    public static boolean assertElementContainsText(By by, String expectedText, String errorTextMessage) throws Exception {
         WebElement element = waitForElementPresent(by, errorTextMessage, 5);
         String actualText = element.getAttribute("text");
         if (actualText.contains(expectedText)) {
@@ -60,13 +60,13 @@ public class MainPageObject {
     }
 
 
-    public WebElement waitForElementAndClick(By by, String errorTextMessage, long timeoutInSeconds) {
+    public static WebElement waitForElementAndClick(By by, String errorTextMessage, long timeoutInSeconds) {
         WebElement element = waitForElementPresent(by, errorTextMessage, timeoutInSeconds);
         element.click();
         return element;
     }
 
-    public WebElement waitForElementAndSendKeys(By by, String errorTextMessage, long timeoutInSeconds, String value) {
+    public static WebElement waitForElementAndSendKeys(By by, String errorTextMessage, long timeoutInSeconds, String value) {
         WebElement element = waitForElementPresent(by, errorTextMessage, timeoutInSeconds);
         element.sendKeys(value);
         return element;

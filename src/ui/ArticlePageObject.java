@@ -4,8 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 
 public class ArticlePageObject extends MainPageObject{
-    private static final String ARTICLE_TO_FAVORITE_LIST_BUTTON =
-            "//android.widget.LinearLayout/android.support.v7.app.ActionBar.Tab/android.widget.ImageView[@content-desc='Add this article to a reading list']";
+    private static final String ARTICLE_TO_FAVORITE_LIST_BUTTON = "//android.widget.LinearLayout/android.support.v7.app.ActionBar.Tab/android.widget.ImageView[@content-desc='Add this article to a reading list']";
     private static final String CONFIRM_ARTICLE_SELECTION_BUTTON = "//*[contains(@text, 'GOT IT')]";
     private static final String STRING_NAME_OF_FOLDER = "org.wikipedia:id/text_input";
     private static final String CONFIRM_ARTICLE_ADDICTION = "//*[contains(@text, 'OK')]";
