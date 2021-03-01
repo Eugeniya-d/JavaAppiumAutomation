@@ -3,7 +3,7 @@ package ui;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 
-public class ArticlePageObject extends MainPageObject{
+public class ArticlePageObject extends MainPageObject {
     private static final String ARTICLE_TO_FAVORITE_LIST_BUTTON = "//android.widget.LinearLayout/android.support.v7.app.ActionBar.Tab/android.widget.ImageView[@content-desc='Add this article to a reading list']";
     private static final String CONFIRM_ARTICLE_SELECTION_BUTTON = "//*[contains(@text, 'GOT IT')]";
     private static final String STRING_NAME_OF_FOLDER = "org.wikipedia:id/text_input";
@@ -20,30 +20,32 @@ public class ArticlePageObject extends MainPageObject{
     }
     /* TEMPLATES METHODS */
 
-    public void addArticleToFavoriteList(){
+    public void addArticleToFavoriteList() {
         this.waitForElementAndClick(By.xpath(ARTICLE_TO_FAVORITE_LIST_BUTTON),
                 "Cannot find 'Add this article to favorites' button",
                 15);
     }
 
-    public void confirmArticleSelection(){
+    public void confirmArticleSelection() {
         this.waitForElementAndClick(By.xpath(CONFIRM_ARTICLE_SELECTION_BUTTON),
                 "Cannot find button with text 'GOT IT'",
                 5);
     }
 
-        public void clearDefaultNameOfFolder(){
+    public void clearDefaultNameOfFolder() {
         this.waitForElementAndClear(By.id(STRING_NAME_OF_FOLDER),
                 "Cannot clear default folder name",
                 15);
     }
-    public void giveArticleNewName(String name){
+
+    public void giveArticleNewName(String name) {
         this.waitForElementAndSendKeys(By.id(STRING_NAME_OF_FOLDER),
                 "Cannot give new name for article",
                 15,
                 name);
     }
-    public void confirmArticleAddiction(){
+
+    public void confirmArticleAddiction() {
         this.waitForElementAndClick(By.xpath(CONFIRM_ARTICLE_ADDICTION),
                 "Cannot add new folder",
                 5);
@@ -55,6 +57,4 @@ public class ArticlePageObject extends MainPageObject{
                 "Cannot find folder with name " + folderName,
                 5);
     }
-
-
-    }
+}

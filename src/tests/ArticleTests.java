@@ -1,11 +1,11 @@
-package tests;
+/*package tests;
 
 import lib.CoreTestCase;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import ui.*;
 
-public class ArticleTests extends CoreTestCase{
+public class ArticleTests extends CoreTestCase {
 
     @Test
     public void testEveryResultHasSearchingWord() throws Exception {
@@ -23,4 +23,4 @@ public class ArticleTests extends CoreTestCase{
                         "Java", "The third search result does not contains 'Java' word"));
     }
 
-}
+}*/

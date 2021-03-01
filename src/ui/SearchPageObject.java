@@ -11,6 +11,8 @@ public class SearchPageObject extends MainPageObject {
     private static final String SEARCH_CANCEL_BUTTON = "//*[@resource-id ='org.wikipedia:id/search_close_btn']";
     private static final String SEARCH_CLEAR_STRING_BUTTON = "//*[@resource-id ='org.wikipedia:id/search_src_text']";
     private static final String FIND_TITLE_OF_ARTICLE_TPL = "//*[contains(@text, '{ARTICLE_TITLE}')]";
+    private static final String FIND_DESCRIPTION_OF_ARTICLE_TPL = "//*[contains(@text, '{ARTICLE_DESCRIPTION}')]";
+    ;
 
     public SearchPageObject(AppiumDriver driver) {
         super(driver);
@@ -20,10 +22,17 @@ public class SearchPageObject extends MainPageObject {
     private static String getSearchElement(String substring) {
         return SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
     }
-    private static String getArticleTitle(String articleTitle) {
-        return FIND_TITLE_OF_ARTICLE_TPL.replace("{ARTICLE_TITLE}", articleTitle);
+
+    private static String getArticleTitle(String title) {
+        return FIND_TITLE_OF_ARTICLE_TPL.replace("{ARTICLE_TITLE}", title);
     }
+
+    private static String getArticleDescription(String description) {
+        return FIND_DESCRIPTION_OF_ARTICLE_TPL.replace("{ARTICLE_DESCRIPTION}", description);
+    }
+
     /* TEMPLATES METHODS */
+
 
     public void initSearchInput() {
         this.waitForElementAndClick(By.xpath(SEARCH_INIT_ELEMENT),
@@ -85,5 +94,17 @@ public class SearchPageObject extends MainPageObject {
                 "Article " + articleTitle + " not presented",
                 0);
     }
+
+    public void waitForElementByTitleAndDescription(String title, String description) {
+        String getArticleTitle = getArticleTitle(title);
+        String getArticleDescription = getArticleDescription(description);
+        this.waitForElementPresent(By.xpath(getArticleTitle),
+                "Article with title " + title + " and description " + description + " not presented",
+                15);
+        this.waitForElementPresent(By.xpath(getArticleDescription),
+                "Article with title " + title + " and description " + description + " not presented",
+                15);
+    }
+
 }
 
