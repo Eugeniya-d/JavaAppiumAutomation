@@ -10,7 +10,7 @@ import ui.SearchPageObject;
 public class MyListsTests extends CoreTestCase {
 
     @Test
-    public void testSaveAndDeleteArticleToReadindList() {
+    public void testSaveAndDeleteArticleToReadindList() throws IllegalAccessException {
         SearchPageObject SearchPageObject = new SearchPageObject(driver);
         ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
         NavigationUi NavigationUi = new NavigationUi(driver);

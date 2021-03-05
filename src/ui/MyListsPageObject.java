@@ -4,8 +4,8 @@ import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 
 public class MyListsPageObject extends MainPageObject{
-    private static final String GO_TO_SELECTED_FOLDER = "org.wikipedia:id/item_title";
-    private static final String FIND_TITLE_OF_ARTICLE_NAME_TPL = "//*[contains(@text, '{ARTICLE_TITLE}')]";
+    private static final String GO_TO_SELECTED_FOLDER = "id:org.wikipedia:id/item_title";
+    private static final String FIND_TITLE_OF_ARTICLE_NAME_TPL = "xpath://*[contains(@text, '{ARTICLE_TITLE}')]";
 
     /* TEMPLATES METHODS */
     private static String getArticleTitle(String articleTitle) {
@@ -17,28 +17,28 @@ public class MyListsPageObject extends MainPageObject{
         super(driver);
     }
 
-    public void goToSelectedFolder(){
-        this.waitForElementAndClick(By.id(GO_TO_SELECTED_FOLDER),
+    public void goToSelectedFolder() throws IllegalAccessException {
+        this.waitForElementAndClick(GO_TO_SELECTED_FOLDER,
                 "Cannot find folder",
                 15);
     }
 
-    public void waitForTitle(String articleTitle) {
+    public void waitForTitle(String articleTitle) throws IllegalAccessException {
         String getArticleTitle = getArticleTitle(articleTitle);
-        this.waitForElementPresent(By.xpath(getArticleTitle),
+        this.waitForElementPresent(getArticleTitle,
                 "Cannot find title with name " + articleTitle,
                 10);
     }
 
     /*public void deleteArticle(String articleTitle) {
         String getArticleTitle = getArticleTitle(articleTitle);
-        this.swipeElementToLeft(By.xpath(getArticleTitle),
+        this.swipeElementToLeft(getArticleTitle,
                 "Cannot find title with name " + articleTitle);
     }*/
 
-    public void waitNotForTitle(String articleTitle) {
+    public void waitNotForTitle(String articleTitle) throws IllegalAccessException {
         String getArticleTitle = getArticleTitle(articleTitle);
-        this.waitForElementNotPresent(By.xpath(getArticleTitle),
+        this.waitForElementNotPresent(getArticleTitle,
                 "Cannot delete the saved article" + articleTitle,
                 10);
     }

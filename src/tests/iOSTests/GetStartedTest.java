@@ -7,7 +7,7 @@ import ui.WelcomePageObject;
 public class GetStartedTest extends IOSTestCase {
 
     @Test
-    public void testPassThroughWelcome(){
+    public void testPassThroughWelcome() throws IllegalAccessException {
 
         WelcomePageObject WelcomePage = new WelcomePageObject(driver);
 

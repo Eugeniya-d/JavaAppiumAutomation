@@ -14,7 +14,7 @@ public class SearchTests extends CoreTestCase {
     }
 
     @Test
-    public void testCancelSearch() {
+    public void testCancelSearch() throws IllegalAccessException {
         SearchPageObject SearchPageObject = new SearchPageObject(driver);
 
         SearchPageObject.initSearchInput();
