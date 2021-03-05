@@ -30,11 +30,11 @@ public class MyListsPageObject extends MainPageObject{
                 10);
     }
 
-    public void deleteArticle(String articleTitle) {
+    /*public void deleteArticle(String articleTitle) {
         String getArticleTitle = getArticleTitle(articleTitle);
         this.swipeElementToLeft(By.xpath(getArticleTitle),
                 "Cannot find title with name " + articleTitle);
-    }
+    }*/
 
     public void waitNotForTitle(String articleTitle) {
         String getArticleTitle = getArticleTitle(articleTitle);

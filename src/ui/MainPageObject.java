@@ -78,7 +78,7 @@ public class MainPageObject {
         return element;
     }
 
-    public void swipeElementToLeft(By by,String errorTextMessage){
+  /*  public void swipeElementToLeft(By by,String errorTextMessage){
         WebElement element =  waitForElementPresent(
                 by,
                 errorTextMessage,
@@ -95,5 +95,5 @@ public class MainPageObject {
                 .waitAction(300)
                 .moveTo(leftX,middleY)
                 .release().perform();
-    }
+    }*/
 }
