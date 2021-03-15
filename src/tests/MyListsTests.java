@@ -39,7 +39,6 @@ public class MyListsTests extends CoreTestCase {
         String firstArticleTitle = "object-oriented programming language";
         String secondArticleTitle = "island of Indonesia";
         MyListsPageObject.waitForTitle(firstArticleTitle);
-       // MyListsPageObject.deleteArticle(firstArticleTitle);
         MyListsPageObject.waitForTitle(secondArticleTitle);
         MyListsPageObject.waitNotForTitle(firstArticleTitle);
     }

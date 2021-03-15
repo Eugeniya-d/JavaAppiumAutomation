@@ -1,5 +1,4 @@
 package tests.iOSTests;
-
 import lib.IOSTestCase;
 import org.junit.Test;
 import ui.WelcomePageObject;

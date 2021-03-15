@@ -1,7 +1,6 @@
 package ui;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
 
 public class NavigationUi extends MainPageObject{
     public NavigationUi(AppiumDriver driver) {
