@@ -1,8 +1,9 @@
 package lib;
 
 import io.appium.java_client.AppiumDriver;
+import junit.framework.TestCase;
 import org.openqa.selenium.ScreenOrientation;
-public class CoreTestCase extends IOSTestCase {
+public class CoreTestCase extends TestCase {
 
 
     protected AppiumDriver driver;

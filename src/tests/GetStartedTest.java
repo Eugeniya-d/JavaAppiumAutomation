@@ -1,9 +1,9 @@
-package tests.iOSTests;
-import lib.IOSTestCase;
+package tests;
+import lib.CoreTestCase;
 import org.junit.Test;
 import ui.WelcomePageObject;
 
-public class GetStartedTest extends IOSTestCase {
+public class GetStartedTest extends CoreTestCase {
 
     @Test
     public void testPassThroughWelcome() throws IllegalAccessException {
