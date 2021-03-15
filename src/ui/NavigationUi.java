@@ -7,8 +7,8 @@ public class NavigationUi extends MainPageObject{
         super(driver);
     }
 
-    private static final String EXIT_FROM_ARTICLE_NAVIGATE_BUTTON =  "xpath://android.widget.ImageButton[@content-desc='Navigate up']";
-    private static final String GO_TO_SAVED_FOLDERS_NAVIGATE_BUTTON = "xpath://android.widget.FrameLayout[@content-desc='My lists']";
+    private static final String EXIT_FROM_ARTICLE_NAVIGATE_BUTTON =  "xpath://ui.android.widget.ImageButton[@content-desc='Navigate up']";
+    private static final String GO_TO_SAVED_FOLDERS_NAVIGATE_BUTTON = "xpath://ui.android.widget.FrameLayout[@content-desc='My lists']";
 
 
     public void exitFromArticlePage() throws IllegalAccessException {

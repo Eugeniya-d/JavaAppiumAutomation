@@ -8,6 +8,9 @@ public class GetStartedTest extends CoreTestCase {
     @Test
     public void testPassThroughWelcome() throws IllegalAccessException {
 
+        if (this.Platform.isAndroid()){
+            return;
+        }
         WelcomePageObject WelcomePage = new WelcomePageObject(driver);
 
         WelcomePage.waitForLearnMoreLink();

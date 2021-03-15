@@ -3,16 +3,16 @@ package ui;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 
-public class SearchPageObject extends MainPageObject {
+abstract public class SearchPageObject extends MainPageObject {
 
-    private static final String SEARCH_INIT_ELEMENT = "xpath://*[contains(@text, 'Search Wikipedia')]";
-    private static final String SEARCH_INPUT = "xpath://*[contains(@text, 'Search…')]";
-    private static final String SEARCH_RESULT_BY_SUBSTRING_TPL = "xpath://*[@resource-id ='org.wikipedia:id/page_list_item_container']//*[@text ='{SUBSTRING}']";
-    private static final String SEARCH_CANCEL_BUTTON = "xpath://*[@resource-id ='org.wikipedia:id/search_close_btn']";
-    private static final String SEARCH_CLEAR_STRING_BUTTON = "xpath://*[@resource-id ='org.wikipedia:id/search_src_text']";
-    private static final String FIND_TITLE_OF_ARTICLE_TPL = "xpath://*[contains(@text, '{ARTICLE_TITLE}')]";
-    private static final String FIND_DESCRIPTION_OF_ARTICLE_TPL = "xpath://*[contains(@text, '{ARTICLE_DESCRIPTION}')]";
-    ;
+    protected static String SEARCH_INIT_ELEMENT;
+    protected static String SEARCH_INPUT;
+    protected static String SEARCH_RESULT_BY_SUBSTRING_TPL;
+    protected static String SEARCH_CANCEL_BUTTON;
+    protected static String SEARCH_CLEAR_STRING_BUTTON;
+    protected static String FIND_TITLE_OF_ARTICLE_TPL;
+    protected static String FIND_DESCRIPTION_OF_ARTICLE_TPL;
+
 
     public SearchPageObject(AppiumDriver driver) {
         super(driver);
