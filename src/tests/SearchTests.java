@@ -3,19 +3,20 @@ package tests;
 import lib.CoreTestCase;
 import org.junit.Test;
 import ui.SearchPageObject;
+import ui.factories.SearchPageObjectFactory;
 
 
 public class SearchTests extends CoreTestCase {
     @Test
     public void testAssertElementHasText() throws Exception {
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
         SearchPageObject.initSearchInput();
     }
 
     @Test
     public void testCancelSearch() throws IllegalAccessException {
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Led Zeppelin");
@@ -27,7 +28,7 @@ public class SearchTests extends CoreTestCase {
 
     @Test
     public void testTitleUsersSearch() throws Exception {
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
@@ -38,7 +39,7 @@ public class SearchTests extends CoreTestCase {
 
     @Test
     public void testTitleAndDescriptionSearch() throws Exception {
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
 
 
         SearchPageObject.initSearchInput();

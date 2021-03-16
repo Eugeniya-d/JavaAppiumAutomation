@@ -10,10 +10,17 @@ public class WelcomePageObject extends MainPageObject{
     private static final String SEARCH_IN_NEARLY_300_LANG_LINK = "id:Search in nearly 300 languages";
     private static final String LEARN_MORE_ABOUT_DATA_COLLECT_LINK = "id:Learn more about data collected";
     private static final String GET_STARTED_BUTTON = "xpath://XCUIElementTypeStaticText[@name='Get started']";
+    private static final String SKIP_BUTTON = "xpath://*[@name='Skip']";
 
 
     public WelcomePageObject(AppiumDriver driver) {
         super(driver);
+    }
+
+    public void clickSkip() throws IllegalAccessException {
+        this.waitForElementAndClick(SKIP_BUTTON,
+                "Cannot find and click skip button",
+                10   );
     }
 
     public void waitForLearnMoreLink() throws IllegalAccessException {

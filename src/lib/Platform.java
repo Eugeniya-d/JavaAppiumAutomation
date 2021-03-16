@@ -10,8 +10,17 @@ import java.net.URL;
 public class Platform {
     private static final String PlATFORM_ANDROID = "ui/android";
     private static final String PlATFORM_IOS = "ios";
-
     private static final String APPIUM_URL = "http://127.0.0.1:4723/wd/hub";
+
+    private static Platform instance;
+    private Platform() {}
+
+    public static Platform getInstance() {
+        if (instance == null){
+            instance = new Platform();
+        }
+        return instance;
+    }
 
     public boolean isAndroid() {
         return isPlatform(PlATFORM_ANDROID);

@@ -6,12 +6,13 @@ import ui.ArticlePageObject;
 import ui.MyListsPageObject;
 import ui.NavigationUi;
 import ui.SearchPageObject;
+import ui.factories.SearchPageObjectFactory;
 
 public class MyListsTests extends CoreTestCase {
 
     @Test
     public void testSaveAndDeleteArticleToReadindList() throws IllegalAccessException {
-        SearchPageObject SearchPageObject = new SearchPageObject(driver);
+        SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
         ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
         NavigationUi NavigationUi = new NavigationUi(driver);
         MyListsPageObject MyListsPageObject = new MyListsPageObject(driver);

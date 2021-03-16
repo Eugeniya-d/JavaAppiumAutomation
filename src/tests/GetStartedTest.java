@@ -1,5 +1,6 @@
 package tests;
 import lib.CoreTestCase;
+import lib.Platform;
 import org.junit.Test;
 import ui.WelcomePageObject;
 
@@ -8,7 +9,7 @@ public class GetStartedTest extends CoreTestCase {
     @Test
     public void testPassThroughWelcome() throws IllegalAccessException {
 
-        if (this.Platform.isAndroid()){
+        if (Platform.getInstance().isAndroid()){
             return;
         }
         WelcomePageObject WelcomePage = new WelcomePageObject(driver);
