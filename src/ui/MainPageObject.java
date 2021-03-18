@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -86,6 +87,7 @@ public class MainPageObject {
         element.clear();
         return element;
     }
+
     public void swipeElementToLeft(String locator,String errorTextMessage) throws IllegalAccessException {
         WebElement element =  waitForElementPresent(
                 locator,
@@ -104,6 +106,29 @@ public class MainPageObject {
                 .moveTo(PointOption.point(rightX, middleY)).
                 release().perform();
     }
+
+    /*public boolean isElementLocatedOnScreen(String locator) throws IllegalAccessException {
+        int elementLocationByY = this.waitForElementPresent(locator,
+                "Cannot element present by locator",
+                5).getLocation().getY();
+        int screenSizeByY = driver.manage().window().getSize().getHeight();
+        return elementLocationByY < screenSizeByY;
+    }
+
+    private void swipeUpTillElementAppear(String locator, String errorMessage, int maxSwipes) throws IllegalAccessException {
+        int alreadySwiped = 0;
+        while(!this.isElementLocatedOnScreen(locator)){
+            if(alreadySwiped> maxSwipes){
+                Assert.assertTrue(errorMessage, this.isElementLocatedOnScreen(locator));
+            }
+            swipeUpQuick();
+            ++alreadySwiped;
+        }
+    }
+
+    public void swipeUpQuick() {
+        swipeUp(200);
+    }*/
 
     private By getLocatorByString(String locatorWithType) throws IllegalAccessException {
 

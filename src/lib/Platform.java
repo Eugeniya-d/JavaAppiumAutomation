@@ -8,7 +8,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.net.URL;
 
 public class Platform {
-    private static final String PlATFORM_ANDROID = "ui/android";
+    private static final String PlATFORM_ANDROID = "android";
     private static final String PlATFORM_IOS = "ios";
     private static final String APPIUM_URL = "http://127.0.0.1:4723/wd/hub";
 

@@ -3,9 +3,9 @@ package ui;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
 
-public class MyListsPageObject extends MainPageObject{
-    private static final String GO_TO_SELECTED_FOLDER = "id:org.wikipedia:id/item_title";
-    private static final String FIND_TITLE_OF_ARTICLE_NAME_TPL = "xpath://*[contains(@text, '{ARTICLE_TITLE}')]";
+abstract public class MyListsPageObject extends MainPageObject{
+    protected static String GO_TO_SELECTED_FOLDER;
+    protected static  String FIND_TITLE_OF_ARTICLE_NAME_TPL;
 
     /* TEMPLATES METHODS */
     private static String getArticleTitle(String articleTitle) {

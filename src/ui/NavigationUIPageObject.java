@@ -2,13 +2,13 @@ package ui;
 
 import io.appium.java_client.AppiumDriver;
 
-public class NavigationUi extends MainPageObject{
-    public NavigationUi(AppiumDriver driver) {
+abstract public class NavigationUIPageObject extends MainPageObject{
+    public NavigationUIPageObject(AppiumDriver driver) {
         super(driver);
     }
 
-    private static final String EXIT_FROM_ARTICLE_NAVIGATE_BUTTON =  "xpath://ui.android.widget.ImageButton[@content-desc='Navigate up']";
-    private static final String GO_TO_SAVED_FOLDERS_NAVIGATE_BUTTON = "xpath://ui.android.widget.FrameLayout[@content-desc='My lists']";
+    protected static String EXIT_FROM_ARTICLE_NAVIGATE_BUTTON;
+    protected static String GO_TO_SAVED_FOLDERS_NAVIGATE_BUTTON;
 
 
     public void exitFromArticlePage() throws IllegalAccessException {

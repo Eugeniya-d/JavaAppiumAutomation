@@ -1,14 +1,14 @@
 package ui;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
 
-public class ArticlePageObject extends MainPageObject {
-    private static final String ARTICLE_TO_FAVORITE_LIST_BUTTON = "xpath://ui.android.widget.LinearLayout/ui.android.support.v7.app.ActionBar.Tab/ui.android.widget.ImageView[@content-desc='Add this article to a reading list']";
-    private static final String CONFIRM_ARTICLE_SELECTION_BUTTON = "xpath://*[contains(@text, 'GOT IT')]";
-    private static final String STRING_NAME_OF_FOLDER = "id:org.wikipedia:id/text_input";
-    private static final String CONFIRM_ARTICLE_ADDICTION = "xpath://*[contains(@text, 'OK')]";
-    private static final String ADD_ARTICLE_TO_EXISTING_FOLDER_TPL = "xpath://*[contains(@text, '{NAME_OF_FOLDER}')]";
+
+abstract public class ArticlePageObject extends MainPageObject {
+    protected static String ARTICLE_TO_FAVORITE_LIST_BUTTON;
+    protected static String CONFIRM_ARTICLE_SELECTION_BUTTON;
+    protected static String STRING_NAME_OF_FOLDER;
+    protected static String CONFIRM_ARTICLE_ADDICTION;
+    protected static String ADD_ARTICLE_TO_EXISTING_FOLDER_TPL;
 
     public ArticlePageObject(AppiumDriver driver) {
         super(driver);

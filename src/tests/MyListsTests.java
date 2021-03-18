@@ -4,18 +4,24 @@ import lib.CoreTestCase;
 import org.junit.Test;
 import ui.ArticlePageObject;
 import ui.MyListsPageObject;
-import ui.NavigationUi;
+import ui.NavigationUIPageObject;
 import ui.SearchPageObject;
+import ui.factories.ArticlePageObjectFactory;
+import ui.factories.NavigationUIPageObjectFactory;
 import ui.factories.SearchPageObjectFactory;
+import ui.factories.MyListPageObjectFactory;
+
 
 public class MyListsTests extends CoreTestCase {
+
+private static final String folderName = "My folder";
 
     @Test
     public void testSaveAndDeleteArticleToReadindList() throws IllegalAccessException {
         SearchPageObject SearchPageObject = SearchPageObjectFactory.get(driver);
-        ArticlePageObject ArticlePageObject = new ArticlePageObject(driver);
-        NavigationUi NavigationUi = new NavigationUi(driver);
-        MyListsPageObject MyListsPageObject = new MyListsPageObject(driver);
+        ArticlePageObject ArticlePageObject = ArticlePageObjectFactory.get(driver);
+        NavigationUIPageObject NavigationUIPageObject = NavigationUIPageObjectFactory.get(driver);
+        MyListsPageObject MyListsPageObject = MyListPageObjectFactory.get(driver);
 
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
@@ -24,18 +30,17 @@ public class MyListsTests extends CoreTestCase {
         ArticlePageObject.addArticleToFavoriteList();
         ArticlePageObject.confirmArticleSelection();
         ArticlePageObject.clearDefaultNameOfFolder();
-        String folderName = "My folder";
         ArticlePageObject.giveArticleNewName(folderName);
         ArticlePageObject.confirmArticleAddiction();
-        NavigationUi.exitFromArticlePage();
+        NavigationUIPageObject.exitFromArticlePage();
         SearchPageObject.initSearchInput();
         SearchPageObject.typeSearchLine("Java");
         String secondArticleTitleOnSearch = "Object-oriented programming language";
         SearchPageObject.goToTitle(secondArticleTitleOnSearch);
         ArticlePageObject.addArticleToFavoriteList();
         ArticlePageObject.addArticleToExistingFolder(folderName);
-        NavigationUi.exitFromArticlePage();
-        NavigationUi.goToSavedFolders();
+        NavigationUIPageObject.exitFromArticlePage();
+        NavigationUIPageObject.goToSavedFolders();
         MyListsPageObject.goToSelectedFolder();
         String firstArticleTitle = "object-oriented programming language";
         String secondArticleTitle = "island of Indonesia";
