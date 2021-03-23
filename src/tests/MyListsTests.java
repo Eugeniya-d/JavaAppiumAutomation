@@ -1,11 +1,9 @@
 package tests;
 
 import lib.CoreTestCase;
+import lib.Platform;
 import org.junit.Test;
-import ui.ArticlePageObject;
-import ui.MyListsPageObject;
-import ui.NavigationUIPageObject;
-import ui.SearchPageObject;
+import ui.*;
 import ui.factories.ArticlePageObjectFactory;
 import ui.factories.NavigationUIPageObjectFactory;
 import ui.factories.SearchPageObjectFactory;
@@ -29,23 +27,34 @@ private static final String folderName = "My folder";
         SearchPageObject.goToTitle(firstArticleTitleOnSearch);
         ArticlePageObject.addArticleToFavoriteList();
         ArticlePageObject.confirmArticleSelection();
-        ArticlePageObject.clearDefaultNameOfFolder();
-        ArticlePageObject.giveArticleNewName(folderName);
-        ArticlePageObject.confirmArticleAddiction();
+        if (Platform.getInstance().isAndroid()) {
+            ArticlePageObject.clearDefaultNameOfFolder();
+            ArticlePageObject.giveArticleNewName(folderName);
+            ArticlePageObject.confirmArticleAddiction();
+        }
         NavigationUIPageObject.exitFromArticlePage();
         SearchPageObject.initSearchInput();
-        SearchPageObject.typeSearchLine("Java");
+        if (Platform.getInstance().isAndroid()) {
+            SearchPageObject.typeSearchLine("Java");
+        }
         String secondArticleTitleOnSearch = "Object-oriented programming language";
         SearchPageObject.goToTitle(secondArticleTitleOnSearch);
         ArticlePageObject.addArticleToFavoriteList();
-        ArticlePageObject.addArticleToExistingFolder(folderName);
+        if (Platform.getInstance().isAndroid()) {
+            ArticlePageObject.addArticleToExistingFolder(folderName);
+        }
         NavigationUIPageObject.exitFromArticlePage();
         NavigationUIPageObject.goToSavedFolders();
-        MyListsPageObject.goToSelectedFolder();
-        String firstArticleTitle = "object-oriented programming language";
-        String secondArticleTitle = "island of Indonesia";
-        MyListsPageObject.waitForTitle(firstArticleTitle);
-        MyListsPageObject.waitForTitle(secondArticleTitle);
-        MyListsPageObject.waitNotForTitle(firstArticleTitle);
+        if (Platform.getInstance().isAndroid()) {
+            MyListsPageObject.goToSelectedFolder();
+            String firstArticleTitle = "object-oriented programming language";
+            String secondArticleTitle = "island of Indonesia";
+            MyListsPageObject.deleteArticle(firstArticleTitle);
+            MyListsPageObject.waitForTitle(secondArticleTitle);
+            MyListsPageObject.waitNotForTitle(firstArticleTitle);
+        }
+        MyListsPageObject.swipeToDeleteArticleForIOS();
+        MyListsPageObject.waitNotForTypeImage();
+        }
     }
-}
+

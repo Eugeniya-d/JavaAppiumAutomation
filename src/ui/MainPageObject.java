@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import lib.Platform;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -98,37 +99,32 @@ public class MainPageObject {
         int upperY = element.getLocation().getY();
         int lowerY = upperY + element.getSize().getHeight();
         int middleY = (upperY + lowerY)/ 2;
+        int offsetX = (-1 * element.getSize().getWidth());
 
-        TouchAction action = new TouchAction((AppiumDriver) driver);
+        TouchAction action = new TouchAction(driver);
         TouchAction press = action.press(PointOption.point(rightX, middleY));
         press.
                 waitAction(WaitOptions.waitOptions(Duration.ofMillis(300)))
-                .moveTo(PointOption.point(rightX, middleY)).
+                .moveTo(PointOption.point(offsetX, 0)).
                 release().perform();
     }
 
-    /*public boolean isElementLocatedOnScreen(String locator) throws IllegalAccessException {
-        int elementLocationByY = this.waitForElementPresent(locator,
-                "Cannot element present by locator",
-                5).getLocation().getY();
-        int screenSizeByY = driver.manage().window().getSize().getHeight();
-        return elementLocationByY < screenSizeByY;
-    }
+    public void clickElementToTheRightUpperCorner(String locator, String error_message) throws IllegalAccessException {
+            WebElement element = this.waitForElementPresent(locator + "/..",
+                    error_message,
+                    10);
+            int rightX = element.getLocation().getX();
+            int upperY = element.getLocation().getY();
+            int lowerY = upperY + element.getSize().getHeight();
+            int middleY = (upperY + lowerY) / 2;
+            int width = element.getSize().getWidth();
 
-    private void swipeUpTillElementAppear(String locator, String errorMessage, int maxSwipes) throws IllegalAccessException {
-        int alreadySwiped = 0;
-        while(!this.isElementLocatedOnScreen(locator)){
-            if(alreadySwiped> maxSwipes){
-                Assert.assertTrue(errorMessage, this.isElementLocatedOnScreen(locator));
-            }
-            swipeUpQuick();
-            ++alreadySwiped;
+            int pointToClickX = (rightX + width) - 3;
+            int pointToClickY = middleY;
+
+            TouchAction action = new TouchAction(driver);
+            action.tap(PointOption.point(pointToClickX, pointToClickY)).perform();
         }
-    }
-
-    public void swipeUpQuick() {
-        swipeUp(200);
-    }*/
 
     private By getLocatorByString(String locatorWithType) throws IllegalAccessException {
 

@@ -5,8 +5,8 @@ import ui.NavigationUIPageObject;
 
 public class IOSNavigationUIPageObject extends NavigationUIPageObject {
  static {
-     EXIT_FROM_ARTICLE_NAVIGATE_BUTTON =  "xpath://ui.android.widget.ImageButton[@content-desc='Navigate up']";
-     GO_TO_SAVED_FOLDERS_NAVIGATE_BUTTON = "xpath://ui.android.widget.FrameLayout[@content-desc='My lists']";
+     EXIT_FROM_ARTICLE_NAVIGATE_BUTTON =  "xpath://XCUIElementTypeButton[@name='Back']";
+     GO_TO_SAVED_FOLDERS_NAVIGATE_BUTTON = "xpath://XCUIElementTypeButton[@name='Saved']";
  }
 
     public IOSNavigationUIPageObject(AppiumDriver driver) {

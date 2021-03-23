@@ -7,6 +7,7 @@ import ui.android.AndroidNavigationUIPageObject;
 import ui.ios.IOSNavigationUIPageObject;
 
 public class NavigationUIPageObjectFactory {
+
     public static NavigationUIPageObject get(AppiumDriver driver) {
         if (Platform.getInstance().isAndroid()) {
             return new AndroidNavigationUIPageObject(driver);

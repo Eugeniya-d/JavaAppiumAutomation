@@ -1,11 +1,12 @@
 package ui;
 
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
 
 abstract public class MyListsPageObject extends MainPageObject{
+    protected static String TYPE_IMAGE_OF_ARTICLE;
     protected static String GO_TO_SELECTED_FOLDER;
-    protected static  String FIND_TITLE_OF_ARTICLE_NAME_TPL;
+    protected static String FIND_TITLE_OF_ARTICLE_NAME_TPL;
+    protected static String FIRST_ARTICLE_TITLE_XPATH;
 
     /* TEMPLATES METHODS */
     private static String getArticleTitle(String articleTitle) {
@@ -30,11 +31,11 @@ abstract public class MyListsPageObject extends MainPageObject{
                 10);
     }
 
-    /*public void deleteArticle(String articleTitle) {
+    public void deleteArticle(String articleTitle) throws IllegalAccessException {
         String getArticleTitle = getArticleTitle(articleTitle);
         this.swipeElementToLeft(getArticleTitle,
                 "Cannot find title with name " + articleTitle);
-    }*/
+    }
 
     public void waitNotForTitle(String articleTitle) throws IllegalAccessException {
         String getArticleTitle = getArticleTitle(articleTitle);
@@ -43,4 +44,23 @@ abstract public class MyListsPageObject extends MainPageObject{
                 10);
     }
 
+    public void waitNotForTypeImage() throws IllegalAccessException {
+        this.waitForElementNotPresent(TYPE_IMAGE_OF_ARTICLE, 
+                "Type Image of element is present on screen",
+                15);
+    }
+
+    public void swipeToDeleteArticleForIOS() throws IllegalAccessException {
+        this.waitForElementPresent(
+                FIRST_ARTICLE_TITLE_XPATH,
+                "Cannot find the article",
+                5
+        );
+        this.swipeElementToLeft(
+                FIRST_ARTICLE_TITLE_XPATH,
+                "Cannot delete article"
+        );
+        clickElementToTheRightUpperCorner(FIRST_ARTICLE_TITLE_XPATH,
+                "Cannot find the element");
+    }
 }
