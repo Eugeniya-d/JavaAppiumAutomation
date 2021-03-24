@@ -54,8 +54,8 @@ public class SearchTests extends CoreTestCase {
         String description2 = "Island sovereign state in the Caribbean Sea";
         SearchPageObject.waitForElementByTitleAndDescription(title2, description2);
 
-        String title3 = "Jamaica national football team";
-        String description3 = "Men's national association football team representing Jamaica";
+        String title3 = "Jamaica Plain";
+        String description3 = "Neighborhood in Boston, Massachusetts, United States";
         SearchPageObject.waitForElementByTitleAndDescription(title3, description3);
     }
 }
